@@ -26,5 +26,11 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(-sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
         }
 
+        // If the player falls off the stage, cause the player to lose.
+        if (rb.position.y < -1)
+        {
+            FindObjectOfType<GameManager>().FailLevel();
+
+        }
     }
 }
