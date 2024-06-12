@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverScreen;
     public GameObject levelCompleteScreen;
 
-    bool gameHasEnded = false;
+    public bool gameHasEnded = false;
 
     public float screenDelay = 2;
     public float restartDelay = 1;
@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     // Called if the current level is complete successfully.
     public void CompleteLevel()
     {
+        gameHasEnded = true;
         Debug.Log("Game Mananger, Level Complete");
         Invoke("ShowLevelCompleteScreen", levelCompleteDelay);
     }
@@ -34,7 +35,7 @@ public class GameManager : MonoBehaviour
     // Starts the next level
     public void NextLevelButton()
     {
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     // Triggers the restart function with a delay
