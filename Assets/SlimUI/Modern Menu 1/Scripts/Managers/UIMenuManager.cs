@@ -14,12 +14,12 @@ namespace SlimUI.ModernMenu{
         public GameObject mainMenu;
         [Tooltip("THe first list of buttons")]
         public GameObject firstMenu;
-        [Tooltip("The Menu for when the PLAY button is clicked")]
-        public GameObject playMenu;
         [Tooltip("The Menu for when the EXIT button is clicked")]
         public GameObject exitMenu;
         [Tooltip("Optional 4th Menu")]
         public GameObject extrasMenu;
+		public GameObject levelSelect;
+		public GameObject options;
 
         public enum Theme {custom1, custom2, custom3};
         [Header("THEME SETTINGS")]
@@ -83,7 +83,6 @@ namespace SlimUI.ModernMenu{
 		void Start(){
 			CameraObject = transform.GetComponent<Animator>();
 
-			playMenu.SetActive(false);
 			exitMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);
 			firstMenu.SetActive(true);
@@ -120,31 +119,40 @@ namespace SlimUI.ModernMenu{
 		public void PlayCampaign(){
 			exitMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);
-			playMenu.SetActive(true);
 		}
 		
 		public void PlayCampaignMobile(){
 			exitMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);
-			playMenu.SetActive(true);
 			mainMenu.SetActive(false);
 		}
 
 		public void ReturnMenu(){
-			playMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);
 			exitMenu.SetActive(false);
 			mainMenu.SetActive(true);
 		}
 
+		public void SettingsMenu()
+		{
+			options.SetActive(true);
+			levelSelect.SetActive(false);
+		}
+
+		public void LevelSelect()
+		{
+			levelSelect.SetActive(true);
+			options.SetActive(false);
+		}
+
 		public void LoadScene(string scene){
 			if(scene != ""){
 				StartCoroutine(LoadAsynchronously(scene));
+				levelSelect.SetActive(false);
 			}
 		}
 
 		public void  DisablePlayCampaign(){
-			playMenu.SetActive(false);
 		}
 
 		public void Position2(){
@@ -248,7 +256,6 @@ namespace SlimUI.ModernMenu{
 		}
 
 		public void ExtrasMenu(){
-			playMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(true);
 			exitMenu.SetActive(false);
 		}
